@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>title</title>
+  <script src="../sdk/build/nativechat.js"></script>
+  <link href="../sdk/build/nativechat.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <p onclick="test()">Test</p>
+</body>
+
+<script>
+  const test = () => {
+    // const request = new Request('https://mbektchiev.github.io/mbektchiev/index.html');
+
+    // const request = new Request('https://api.nativechat.com/v1/bots/a2fae41ff9894f8a9ef2f051/channels/1b3c865a-0790-49c4-a5b6-947478aa96e3/rest/gosho', {
+    //     method: 'POST',
+    //     headers: new Headers({
+    //       "Authorization": "Bearer 57389030-6e4c-4872-a0c0-d681f00ac5c0",
+    //       "Content-Type": "application/json",
+    //     }),
+    //     body: '{"sender":{"id":"f24de858-e121-48fe-91b2-4ffe527a210b"},"message":{"text":"hi"}}',
+    //     // mode: 'no-cors',
+    // });
+    const request = new Request('http://localhost:3000/v1/bots/a97bc323e723443b909e9e86/channels/87a82b72-7f4a-4e48-848a-0bc730862557/rest/rest', {
+        method: 'POST',
+        headers: new Headers({
+          "Authorization": "Bearer 54e9c632-dd06-4f4c-a120-90cd5a87f3f8",
+          "Content-Type": "application/json",
+        }),
+        body: '{"sender":{"id":"95dbe07d-0d0f-470b-9434-01367f4f3659"},"message":{"text":"hi"}}',
+    });
+    fetch(request)
+      .then(response => {
+        console.warn(`Response: body: ${response.body} status: ${response.status} statusText: ${response.statusText} headers: ${response.headers}`);
+        response.body.getReader().read().then((buf) => {
+          alert(`Response: ${JSON.stringify(response)} ; ${new TextDecoder("utf-8").decode(buf.value)}; ${response.status}`);
+        });
+      });
+  }
+</script>
+
+
+</html>
